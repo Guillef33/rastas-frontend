@@ -1,0 +1,49 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.loginContainer  form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 20px auto;
+    height: 500px;
+    justify-content: center;
+    /* align-items: center; */
+    background-color: #f3f3f3;
+    padding: 20px;
+    border: 3px solid white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;;
+}
+
+.loginContainer label {
+    text-align: left;
+}
+
+.loginContainer input {
+    margin: 10px 0px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    width: 95%;
+    border: 1px solid #f8f8f8
+}
+
+.loginContainer img {
+    border-radius: 50%;
+    width: 100px;
+    margin:20px;
+}
+
+.loginContainer button {
+    border: none;
+    padding: 10px 5px;
+    cursor: pointer;
+    background-color: darkcyan;
+    border-radius: 5px;
+    margin: 10px 0px;
+    width: 100%;
+    color: white;
+}

@@ -1,0 +1,15 @@
+header {
+    max-width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: gray;
+    margin: auto;
+
+}
+
+header a {
+        color: white;
+        font-size: 26px;
+        text-decoration: none;
+}
+
