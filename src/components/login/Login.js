@@ -1,39 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./login.css";
-import { useNavigate } from "react-router-dom";
-import useUser from "../../hooks/useUser";
+import { UserContext } from "../../context/UserContext";
 import noProfile from "../../assets/no-profile-img.jpg";
+import { useNavigate } from "react-router-dom";
+import Axios from "axios";
+
 import harcodeUsers from "../../hooks/harcodeUsers";
 
 function Login() {
-  const [username, setUserame] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const { login, isLogged } = useUser();
+  const {
+    login,
+    setLogin,
+    loginSubmit,
+    user,
+    setUser,
+    username,
+    setUserame,
+    password,
+    setPassword,
+    error,
+    setError,
+    // loginWeb,
+    // loginStatus,
+  } = useContext(UserContext);
+
+  const [loginStatus, setLoginStatus] = useState("");
 
   let navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLogged) navigate("/dashboard");
-  }, [isLogged, navigate]);
+  Axios.defaults.withCredentials = true;
 
-  const handleSubmit = (e) => {
+  const loginWeb = (e) => {
     e.preventDefault();
+    Axios.post("http://localhost:3050/login", {
+      username: username,
+      password: password,
+    }).then((response) => {
+      if (response.data.message) {
+        setLoginStatus(response.data.message);
+      } else {
+        setLoginStatus(response.data[0].username);
+        setLogin(true);
+        navigate("/dashboard");
+      }
 
-    const userInDB = harcodeUsers.find((el) => el.username === username);
-
-    if (username === userInDB.username && password === userInDB.password) {
-      login(username, password);
-    } else {
-      setError("No se ha encontrado el usuario");
-    }
+      console.log(response.data);
+    });
   };
 
-  console.log(error);
+  useEffect(() => {
+    Axios.get("http://localhost:3050/login").then((response) => {
+      console.log(response);
+      if (response.data.loggedIn === true) {
+        setLoginStatus(response.data.user[0].username);
+      }
+    });
+  }, []);
 
   return (
     <div className="loginContainer">
-      <form onSubmit={handleSubmit}>
+      <form>
         <img src={noProfile} alt="profile-pic" />
         <label>Username</label>
         <input
@@ -51,8 +77,10 @@ function Login() {
           value={password}
         />
 
-        <button>Enviar</button>
-        <span>{error}</span>
+        <button onClick={loginWeb} type="submit">
+          Enviar
+        </button>
+        <h3>{loginStatus}</h3>
       </form>
     </div>
   );

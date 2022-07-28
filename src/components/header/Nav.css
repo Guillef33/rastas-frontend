@@ -1,4 +1,4 @@
-header {
+nav {
     max-width: 100%;
     display: flex;
     justify-content: space-around;
@@ -7,9 +7,9 @@ header {
 
 }
 
-header a {
-        color: white;
-        font-size: 26px;
-        text-decoration: none;
+nav a {
+    color: white;
+    font-size: 26px;
+    text-decoration: none;
 }
 

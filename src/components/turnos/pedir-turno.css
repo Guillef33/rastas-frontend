@@ -1,0 +1,13 @@
+.pedir-turno-container {
+
+}
+
+.cortes-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap:10px;
+}
+
+.cortes-container img {
+    width: 400px;
+}

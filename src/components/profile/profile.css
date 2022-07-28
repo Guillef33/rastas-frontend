@@ -1,4 +1,13 @@
-.profile-data {
+.profile-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
 }
+
+
+.profile {
+background-color: white !important;
+background-image: none;
+}
+
+
