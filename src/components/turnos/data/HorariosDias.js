@@ -1,16 +1,14 @@
 const Horarios = [
   {
-    id: 1,
+    id: 0,
     dia: "lunes",
     hora: [9, 10, 11, 12, 13],
   },
   {
-    id: 2,
+    id: 1,
     dia: "martes",
     hora: [9, 10, 11, 12, 13],
   },
 ];
 
 export default Horarios;
-
-// console.log(CortesDePelo.map((el) => console.log(el));

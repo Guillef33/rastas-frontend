@@ -18,10 +18,6 @@ function Login() {
     setUserame,
     password,
     setPassword,
-    error,
-    setError,
-    // loginWeb,
-    // loginStatus,
   } = useContext(UserContext);
 
   const [loginStatus, setLoginStatus] = useState("");
@@ -40,11 +36,16 @@ function Login() {
         setLoginStatus(response.data.message);
       } else {
         setLoginStatus(response.data[0].username);
+        setUser(response.data);
         setLogin(true);
+        // store the user in localStorage
+        localStorage.setItem("user", username);
+        localStorage.setItem("password", password);
+        localStorage.setItem("login", login);
+
+        console.log(response.data);
         navigate("/dashboard");
       }
-
-      console.log(response.data);
     });
   };
 
@@ -53,6 +54,7 @@ function Login() {
       console.log(response);
       if (response.data.loggedIn === true) {
         setLoginStatus(response.data.user[0].username);
+
       }
     });
   }, []);

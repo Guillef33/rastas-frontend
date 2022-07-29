@@ -16,6 +16,8 @@ function Profile() {
   const [newage, setNewAge] = useState("");
   const [newcompany, setNewCompany] = useState("");
   const [newphone, setNewPhone] = useState("");
+  const [role, setRole] = useState("");
+
   const [userLogged, setUserLogged] = useState({});
 
   Axios.defaults.withCredentials = true;
@@ -42,6 +44,7 @@ function Profile() {
       company: newcompany,
       phone: newphone,
       biography: newbiography,
+      role: role,
       id: id,
     }).then((response) => {
       console.log(response);
@@ -108,7 +111,13 @@ function Profile() {
             onChange={(e) => setNewBiography(e.target.value)}
             value={newbiography}
           />
-
+          <label>Role: puedes elegir entre admin, moderator o visitor</label>
+          <input
+            type="text"
+            placeholder="Ingrese su rol"
+            onChange={(e) => setRole(e.target.value)}
+            value={role}
+          />
           <button onClick={(e) => updateUser(e)} type="submit">
             Enviar
           </button>

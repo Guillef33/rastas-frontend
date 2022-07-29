@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import CortesDePelo from "./data/cortesDePelo";
 import Peluqueros from "./data/Peluquero";
@@ -17,18 +17,17 @@ function NuevoTurno() {
   const [turno, setTurno] = useState({});
   const [usuarioLogeado, setUsuarioLogeado] = useState("");
 
-  console.log(corte);
-  console.log(fecha);
-  console.log(peluquero);
-  console.log(tiempo);
+  const selectid = useRef(0);
+
+  let variable = "";
 
   Axios.defaults.withCredentials = true;
 
-  console.log(horarios.id);
+  // console.log(horarios.id);
 
   useEffect(() => {
     Axios.get("http://localhost:3050/login").then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       // console.log(response.data.user[0].id);
       if (response.data.loggedIn === true) {
         setUsuarioLogeado(response.data.user[0].id);
@@ -50,6 +49,13 @@ function NuevoTurno() {
       console.log(response);
     });
   };
+
+  // let divElement = '';
+
+  useEffect(() => {
+    variable = selectid.current;
+    console.log(variable.value); // logs <div>I'm an element</div>
+  }, [selectid]);
 
   return (
     <div className="loginContainer">
@@ -83,26 +89,20 @@ function NuevoTurno() {
         <select
           value={horarios}
           onChange={(e) => setHorarios(e.target.value)}
-          id="1"
+          ref={selectid}
         >
           {Horarios.map((h, id) => (
-            <option key={h.value} value={h.value}>
+            <option key={h.value} value={h.id}>
               {h.dia}
             </option>
           ))}
         </select>
-        <select value={horas} onChange={(e) => setHoras(e.target.value)}>
-          {/* {horarios.id ? ( */}
-          {/* <> */}
+        <select onChange={(e) => setHoras(e.target.value)}>
           {Horarios[0].hora.map((h, id) => (
-            <option key={h.value} value={h.value}>
+            <option key={h} value={horas}>
               {h}
             </option>
           ))}
-          {/* </>
-          ) : (
-            "" */}
-          )}
         </select>
         <input type="date" onChange={(e) => setFecha(e.target.value)} />
 
