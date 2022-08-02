@@ -1,33 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Axios from "axios";
+
+import './table.css'
 
 function Admin() {
   const [listaEmpleados, setListaEmpleados] = useState([]);
 
   const getTurnos = (e) => {
     // console.log("estoy");
-    e.preventDefault();
+    // e.preventDefault();
     Axios.get("http://localhost:3050/turnos").then((response) => {
       setListaEmpleados(response.data);
     });
   };
+
+  useEffect(() => {
+    getTurnos();
+  }, []);
+
   return (
     <div className="mostrarEmpleados">
-      <button onClick={getTurnos}>Mostrar Turnos Actuales</button>
+      {/* <button onClick={getTurnos}>Mostrar Turnos Actuales</button> */}
 
-      <>
+      <table id="customers">
+        <tr className="first-row">
+          <th>Tipo de corte</th>
+          <th>Peluquero</th>
+          <th>Fecha</th>
+          <th>Tiempo de turno</th>
+        </tr>
         {listaEmpleados.map((item) => {
           return (
-            <div>
-              <h1>{item.corte}</h1>
-              <p>{item.peluquero}</p>
-              <p>{item.fecha}</p>
-              <p>{item.tiempo}</p>;
-            </div>
+            <tr className="table">
+              <td>{item.corte}</td>
+              <td>{item.peluquero}</td>
+              <td>{item.fecha}</td>
+              <td>{item.tiempo}</td>
+            </tr>
           );
         })}
-      </>
+      </table>
     </div>
   );
 }

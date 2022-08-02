@@ -8,7 +8,7 @@ import {
   Link,
 } from "react-router-dom";
 
-import Header from "../components/header/Nav";
+import Header from "../components/nav/Nav";
 import Profile from "../components/profile/profile";
 import Home from "../pages/Home";
 

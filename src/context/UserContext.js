@@ -10,55 +10,30 @@ const UserProvider = (props) => {
   const [user, setUser] = useState(null);
   const [username, setUserame] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
 
-  // const [loginStatus, setLoginStatus] = useState("");
+  useEffect(() => {
+    Axios.get("http://localhost:3050/login").then((response) => {
+      if (response.data.loggedIn === true) {
+        setRole(response.data.user[0].role);
+        console.log(response.data.user[0].role);
+        console.log(response.data);
+      }
+    });
+  }, []);
 
-  // let navigate = useNavigate();
+  console.log(login);
+  console.log(username);
+  console.log(role);
 
-  // Axios.defaults.withCredentials = true;
-
-  // const [error, setError] = useState("");
-
-  // const loginWeb = (e) => {
-  //   e.preventDefault();
-  //   Axios.post("http://localhost:3050/login", {
-  //     username: username,
-  //     password: password,
-  //   }).then((response) => {
-  //     if (response.data.message) {
-  //       setLoginStatus(response.data.message);
-  //     } else {
-  //       setLoginStatus(response.data[0].username);
-  //       setLogin(true);
-  //       navigate("/dashboard");
-  //     }
-
-  //     console.log(response.data);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   Axios.get("http://localhost:3050/login").then((response) => {
-  //     console.log(response);
-  //     if (response.data.loggedIn == true) {
-  //       setLoginStatus(response.data.user[0].username);
-  //       // setLogin(true);
-  //       // navigate("/dashboard");
-  //     }
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(username, password);
-  //   localStorage.setItem("user", JSON.stringify(user));
-  //   localStorage.setItem("password", JSON.stringify(password));
-  //   localStorage.setItem("login", JSON.stringify(login));
-  //   if ((user, login)) {
-  //     localStorage.getItem("user");
-  //     localStorage.getItem("login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.stringify(loggedInUser);
+      setUser(foundUser);
+      console.log(foundUser);
+    }
+  }, []);
 
   const logout = () => {
     setLogin(false);
@@ -76,7 +51,6 @@ const UserProvider = (props) => {
         setUserame,
         password,
         setPassword,
-
       }}
     >
       {props.children}
