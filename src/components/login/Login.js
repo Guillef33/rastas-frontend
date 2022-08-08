@@ -37,7 +37,7 @@ function Login() {
         setLoginStatus(response.data[0].username);
         setUser(response.data);
         setLogin(true);
-        // store the user in localStorage
+
         localStorage.setItem("user", username);
         localStorage.setItem("password", password);
         localStorage.setItem("login", login);
@@ -47,13 +47,20 @@ function Login() {
       }
     });
   };
+  
+  // useEffect(() => {
+  //   const logStatus = localStorage.getItem('login') ? true : false;
+  //   console.log(logStatus)
+  //   if(logStatus){
+  //     navigate("/dashboard");
+  //   }
+  // }, [])
 
   useEffect(() => {
     Axios.get("http://localhost:3050/login").then((response) => {
       console.log(response);
       if (response.data.loggedIn === true) {
         setLoginStatus(response.data.user[0].username);
-
       }
     });
   }, []);

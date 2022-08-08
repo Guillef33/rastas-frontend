@@ -29,8 +29,6 @@ const NaturalRastasApp = () => {
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/pedir-turno" element={<NuevoTurno />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
-
-
         </Routes>
 
         {/* Acá va el footer */}

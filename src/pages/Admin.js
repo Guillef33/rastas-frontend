@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Axios from "axios";
 
-import './table.css'
+import "./table.css";
 
 function Admin() {
   const [listaEmpleados, setListaEmpleados] = useState([]);
@@ -19,16 +19,25 @@ function Admin() {
     getTurnos();
   }, []);
 
-  return (
-    <div className="mostrarEmpleados">
-      {/* <button onClick={getTurnos}>Mostrar Turnos Actuales</button> */}
+  function cancelarTurno () {
+    console.log('El turno va a ser cancelado. Enviar notificacion al cliente?')
+  }
 
-      <table id="customers">
+    function editarTurno() {
+      console.log(
+        "El turno va a ser editado. Enviar notificacion al cliente?"
+      );
+    }
+
+  return (
+      <table id="tabla-turnos">
         <tr className="first-row">
           <th>Tipo de corte</th>
           <th>Peluquero</th>
           <th>Fecha</th>
           <th>Tiempo de turno</th>
+          <th>Borrar</th>
+          <th>Editar</th>
         </tr>
         {listaEmpleados.map((item) => {
           return (
@@ -37,11 +46,16 @@ function Admin() {
               <td>{item.peluquero}</td>
               <td>{item.fecha}</td>
               <td>{item.tiempo}</td>
+              <td>
+                <button onClick={cancelarTurno}>Cancelar</button>
+              </td>
+              <td>
+                <button onClick={editarTurno}>Editar</button>
+              </td>
             </tr>
           );
         })}
       </table>
-    </div>
   );
 }
 

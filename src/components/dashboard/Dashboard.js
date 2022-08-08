@@ -16,10 +16,23 @@ function Dashboard() {
     password,
     setPassword,
     userInDB,
-    role,
-    setRole
+    user1
   } = useContext(UserContext);
 
+  const [role, setRole] = useState("");
+  // const { role } = user1;
+
+  useEffect(() => {
+    Axios.get("http://localhost:3050/login").then((response) => {
+      if (response.data.loggedIn === true) {
+        setRole(response.data.user[0].role);
+        console.log(response.data.user[0].role);
+        console.log(response.data);
+      }
+    });
+  }, []);
+
+  console.log(role);
 
   return (
     <div>
